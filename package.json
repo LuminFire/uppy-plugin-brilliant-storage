@@ -2,7 +2,7 @@
   "name": "uppy-plugin-brilliant-storage",
   "version": "1.0.0",
   "description": "Allows Uppy to use Brilliant Storage as a destination.",
-  "repository": "https://git.luminfire.net/luminfire/products/brilliantstorage/uppy-plugin-brilliant-storage",
+  "repository": "https://github.com/LuminFire/uppy-plugin-brilliant-storage",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src/index.js -o lib/index.js",
@@ -28,8 +28,7 @@
   },
   "dependencies": {
     "@uppy/core": "^1.6.0",
-    "@uppy/utils": "^2.1.0",
-    "compressorjs": "^1.0.5"
+    "@uppy/utils": "^2.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
