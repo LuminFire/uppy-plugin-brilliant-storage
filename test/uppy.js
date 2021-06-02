@@ -8,9 +8,7 @@ const core = new Core({
 core.use(FileInput, {
   target: 'body'
 })
-core.use(BrilliantStorage, {
-  quality: 0.6
-})
+core.use(BrilliantStorage)
 
 window.uppy = core
 
