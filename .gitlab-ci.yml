@@ -1,0 +1,8 @@
+
+stages:
+  - test
+
+include:
+  - project: 'templates/gitlab/ci-templates'
+    file:
+      - 'security/lockfiles.yml'
