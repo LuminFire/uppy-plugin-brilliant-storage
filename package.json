@@ -27,21 +27,21 @@
     ]
   },
   "dependencies": {
-    "@uppy/core": "^1.6.0",
-    "@uppy/utils": "^2.1.0"
+    "@uppy/core": "^1.19.1",
+    "@uppy/utils": "^3.6.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.4",
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-transform-object-assign": "^7.2.0",
-    "@babel/preset-env": "^7.6.3",
-    "@uppy/dashboard": "^1.5.0",
-    "@uppy/file-input": "^1.4.0",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.14.3",
+    "@babel/plugin-transform-object-assign": "^7.12.13",
+    "@babel/preset-env": "^7.14.4",
+    "@uppy/dashboard": "^1.20.1",
+    "@uppy/file-input": "^1.5.1",
     "babel": "^6.23.0",
     "express": "^4.17.1",
     "jest": "^27.0.4",
     "jest-puppeteer": "^5.0.4",
     "puppeteer": "^9.1.1",
-    "webpack": "^4.41.2"
+    "webpack": "^5.38.1"
   }
 }
