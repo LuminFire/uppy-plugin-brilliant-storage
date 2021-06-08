@@ -51,7 +51,8 @@ class UppyBrilliantStorage extends Plugin {
       //   this.uppy.log(err, 'warning')
       // })
     })
-
+  }
+  
   install () {
     this.uppy.addPreProcessor(this.getUploadParameters)
     this.uppy.addPreProcessor(this.prepareUpload)
