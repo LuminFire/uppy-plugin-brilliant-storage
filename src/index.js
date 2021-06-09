@@ -24,9 +24,6 @@ class UppyBrilliantStorage extends Plugin {
   getUploadParameters (fileIDs) {
     console.log(this.opts)
     console.log(file)
-    if (!this.opts.endpoint) {
-      throw new Error('Expected a `endpoint` option containing the brilliant storage address.')
-    }
 
     fileIDs.forEach((id) => {
       const file = this.uppy.getFile(id)
