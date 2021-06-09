@@ -17,50 +17,44 @@ class UppyBrilliantStorage extends Plugin {
     this.opts = { ...defaultOptions, ...opts }
   }
 
-
-
   // Brilliant Storage Settings.
   handlePrefixes (fileIDs) {
     var $form = jQuery('#brilliant_uploader'),
     nonce = $form.data('nonce'),
     presignEndpointPath = $form.data('admin-ajax'),
-    storageProvider = $form.data('storage-provider'),
-    webcamSupport = $form.data('webcam-support'),
     uploaderWrap = document.querySelector('#brilliant_uploader'),
     formId = uploaderWrap.dataset.formid;
     
-    fileIDs.forEach((id) => {
-      const file = this.uppy.getFile(id)
+    const promises = fileIDs.map((fileID) => {
+      const file = this.uppy.getFile(fileID)
 
-      console.log(file)
-      jQuery.ajax({
+      var presignFormData = new FormData();
+          presignFormData.append("action", "presign_url");
+          presignFormData.append("formId", formId);
+          presignFormData.append("fileId", file.id);
+          presignFormData.append("nonce", nonce);
+          presignFormData.append("filename", file.name);
+
+      return fetch(presignEndpointPath, {
         method: 'POST',
-        url: presignEndpointPath,
-        data: {
-          action: "presign_url",
-          formId: formId,
-          fileId: file.id,
-          nonce: nonce,
-          filename: file.name,
-        }
-      }).success(function(data) {
-        // console.log(data);
+        body: presignFormData,
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
 
         uppy.setFileMeta(file.id, {
           name: data.data.prefix,
           title: file.name,
           sizes: JSON.stringify(brilliantStorageData.fields.sizes),
-          meta: JSON.stringify({
-            exif: file.exifdata,
-          }),
           tags: JSON.stringify(brilliantStorageData.fields.tags),
         });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
       });
     })
-
-    const query = qsStringify({ filename, type, metadata })
-    return this.client.get(`s3/params?${query}`)
-      .then(assertServerError)
+    return Promise.all(promises)
   }
 
   
