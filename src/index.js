@@ -18,14 +18,22 @@ class UppyBrilliantStorage extends Plugin {
   }
 
 
+
   // Brilliant Storage Settings.
   handlePrefixes (fileIDs) {
+    var $form = jQuery('#brilliant_uploader'),
+    nonce = $form.data('nonce'),
+    presignEndpointPath = $form.data('admin-ajax'),
+    storageProvider = $form.data('storage-provider'),
+    webcamSupport = $form.data('webcam-support'),
+    uploaderWrap = document.querySelector('#brilliant_uploader'),
+    formId = uploaderWrap.dataset.formid;
     
     fileIDs.forEach((id) => {
       const file = this.uppy.getFile(id)
 
       console.log(file)
-      $.ajax({
+      jQuery.ajax({
         method: 'POST',
         url: presignEndpointPath,
         data: {
