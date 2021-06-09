@@ -21,21 +21,26 @@ class UppyBrilliantStorage extends Plugin {
 
 
   // Brilliant Storage Settings.
-  getUploadParameters (file) {
+  getUploadParameters (fileIDs) {
     console.log(this.opts)
     console.log(file)
     if (!this.opts.endpoint) {
       throw new Error('Expected a `endpoint` option containing the brilliant storage address.')
     }
 
-    const filename = file.meta.name
-    const type = file.meta.type
-    const metadata = {}
-    this.opts.metaFields.forEach((key) => {
-      if (file.meta[key] != null) {
-        metadata[key] = file.meta[key].toString()
-      }
+    fileIDs.forEach((id) => {
+      const file = this.uppy.getFile(id)
+      uppy.setFileMeta(file.id, {
+        name: data.data.prefix,
+        title: file.name,
+        sizes: JSON.stringify(brilliantStorageData.fields.sizes),
+        meta: JSON.stringify({
+          exif: file.exifdata,
+        }),
+        tags: JSON.stringify(brilliantStorageData.fields.tags),
+      });
     })
+
 
     const query = qsStringify({ filename, type, metadata })
     return this.client.get(`s3/params?${query}`)
