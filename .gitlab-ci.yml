@@ -1,0 +1,19 @@
+# Tests, builds, and deploys a WordPress site to Runcloud.
+# See https://git.luminfire.net/ops/tooling/ci/gitlab-ci-templates/-/tree/master/deploy-runcloud-laravel-mix
+
+stages:
+  - test
+  - build
+  - deploy
+
+include:
+  - project: 'templates/gitlab/ci-templates'
+      file:
+      # - 'test/php-syntax-check.yml'
+      # - 'test/WP/phpunit.yml'
+      - 'security/lockfiles.yml'
+      # - 'build/wp-plugin-with-npm.yml'
+      - 'deploy/documentation/brilliantsolutions-docsify.yml'
+  
+test:security:npm:
+  allow_failure: true
