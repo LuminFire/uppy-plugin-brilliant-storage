@@ -48,7 +48,7 @@ class UppyBrilliantStorage extends Plugin {
         });
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Couldn’t fetch upload data: ', error);
       });
     })
     return Promise.all(promises)
