@@ -1,5 +1,4 @@
 const { Plugin } = require('@uppy/core')
-
 class UppyBrilliantStorage extends Plugin {
   constructor (uppy, opts) {
     super(uppy, opts)
