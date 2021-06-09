@@ -11,7 +11,7 @@ class UppyBrilliantStorage extends Plugin {
       timeout: 30 * 1000,
       limit: 0,
       metaFields: [], // have to opt in
-      getUploadParameters: this.getUploadParameters.bind(this),
+      handlePrefixes: this.handlePrefixes.bind(this),
     }
 
     this.opts = { ...defaultOptions, ...opts }
@@ -19,7 +19,7 @@ class UppyBrilliantStorage extends Plugin {
 
 
   // Brilliant Storage Settings.
-  getUploadParameters (fileIDs) {
+  handlePrefixes (fileIDs) {
     
     fileIDs.forEach((id) => {
       const file = this.uppy.getFile(id)
@@ -45,11 +45,11 @@ class UppyBrilliantStorage extends Plugin {
 
   
   install () {
-    this.uppy.addPreProcessor(this.getUploadParameters)
+    this.uppy.addPreProcessor(this.handlePrefixes)
   }
 
   uninstall () {
-    this.uppy.removePreProcessor(this.getUploadParameters)
+    this.uppy.removePreProcessor(this.handlePrefixes)
   }
 }
 
