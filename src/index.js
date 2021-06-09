@@ -1,5 +1,4 @@
 const { Plugin } = require('@uppy/core')
-
 class UppyBrilliantStorage extends Plugin {
   constructor (uppy, opts) {
     super(uppy, opts)
@@ -11,45 +10,57 @@ class UppyBrilliantStorage extends Plugin {
       timeout: 30 * 1000,
       limit: 0,
       metaFields: [], // have to opt in
-      getUploadParameters: this.getUploadParameters.bind(this),
+      handlePrefixes: this.handlePrefixes.bind(this),
     }
 
     this.opts = { ...defaultOptions, ...opts }
   }
 
-
   // Brilliant Storage Settings.
-  getUploadParameters (fileIDs) {
+  handlePrefixes (fileIDs) {
+    var $form = jQuery('#brilliant_uploader'),
+    nonce = $form.data('nonce'),
+    presignEndpointPath = $form.data('admin-ajax'),
+    uploaderWrap = document.querySelector('#brilliant_uploader'),
+    formId = uploaderWrap.dataset.formid;
     
-    fileIDs.forEach((id) => {
-      const file = this.uppy.getFile(id)
+    const promises = fileIDs.map((fileID) => {
+      const file = this.uppy.getFile(fileID)
 
-      console.log(file)
+      var presignFormData = new FormData();
+          presignFormData.append("action", "presign_url");
+          presignFormData.append("formId", formId);
+          presignFormData.append("fileId", file.id);
+          presignFormData.append("nonce", nonce);
+          presignFormData.append("filename", file.name);
 
-      uppy.setFileMeta(file.id, {
-        name: data.data.prefix,
-        title: file.name,
-        sizes: JSON.stringify(brilliantStorageData.fields.sizes),
-        meta: JSON.stringify({
-          exif: file.exifdata,
-        }),
-        tags: JSON.stringify(brilliantStorageData.fields.tags),
+      return fetch(presignEndpointPath, {
+        method: 'POST',
+        body: presignFormData,
+      })
+      .then(response => response.json())
+      .then(data => {
+        uppy.setFileMeta(file.id, {
+          name: data.data.prefix,
+          title: file.name,
+          sizes: JSON.stringify(brilliantStorageData.fields.sizes),
+          tags: JSON.stringify(brilliantStorageData.fields.tags),
+        });
+      })
+      .catch((error) => {
+        console.error('Couldn’t fetch upload data: ', error);
       });
     })
-
-
-    const query = qsStringify({ filename, type, metadata })
-    return this.client.get(`s3/params?${query}`)
-      .then(assertServerError)
+    return Promise.all(promises)
   }
 
   
   install () {
-    this.uppy.addPreProcessor(this.getUploadParameters)
+    this.uppy.addPreProcessor(this.handlePrefixes)
   }
 
   uninstall () {
-    this.uppy.removePreProcessor(this.getUploadParameters)
+    this.uppy.removePreProcessor(this.handlePrefixes)
   }
 }
 
