@@ -40,8 +40,6 @@ class UppyBrilliantStorage extends Plugin {
       })
       .then(response => response.json())
       .then(data => {
-        console.log('Success:', data);
-
         uppy.setFileMeta(file.id, {
           name: data.data.prefix,
           title: file.name,
