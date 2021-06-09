@@ -25,18 +25,30 @@ class UppyBrilliantStorage extends Plugin {
       const file = this.uppy.getFile(id)
 
       console.log(file)
+      $.ajax({
+        method: 'POST',
+        url: presignEndpointPath,
+        data: {
+          action: "presign_url",
+          formId: formId,
+          fileId: file.id,
+          nonce: nonce,
+          filename: file.name,
+        }
+      }).success(function(data) {
+        // console.log(data);
 
-      uppy.setFileMeta(file.id, {
-        name: data.data.prefix,
-        title: file.name,
-        sizes: JSON.stringify(brilliantStorageData.fields.sizes),
-        meta: JSON.stringify({
-          exif: file.exifdata,
-        }),
-        tags: JSON.stringify(brilliantStorageData.fields.tags),
+        uppy.setFileMeta(file.id, {
+          name: data.data.prefix,
+          title: file.name,
+          sizes: JSON.stringify(brilliantStorageData.fields.sizes),
+          meta: JSON.stringify({
+            exif: file.exifdata,
+          }),
+          tags: JSON.stringify(brilliantStorageData.fields.tags),
+        });
       });
     })
-
 
     const query = qsStringify({ filename, type, metadata })
     return this.client.get(`s3/params?${query}`)
