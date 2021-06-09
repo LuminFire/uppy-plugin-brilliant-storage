@@ -20,10 +20,12 @@ class UppyBrilliantStorage extends Plugin {
 
   // Brilliant Storage Settings.
   getUploadParameters (fileIDs) {
-    console.log(fileIDs)
-
+    
     fileIDs.forEach((id) => {
       const file = this.uppy.getFile(id)
+
+      console.log(file)
+
       uppy.setFileMeta(file.id, {
         name: data.data.prefix,
         title: file.name,
