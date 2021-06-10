@@ -16,19 +16,19 @@ class UppyBrilliantStorage extends Plugin {
     this.opts = { ...defaultOptions, ...opts }
   }
 
-  // Brilliant Storage Settings.
+
   handlePrefixes (fileIDs) {
     var $form = jQuery('#brilliant_uploader'),
     nonce = $form.data('nonce'),
     presignEndpointPath = $form.data('admin-ajax'),
     uploaderWrap = document.querySelector('#brilliant_uploader'),
     formId = uploaderWrap.dataset.formid;
-    
+
     const promises = fileIDs.map((fileID) => {
       const file = this.uppy.getFile(fileID)
 
       var presignFormData = new FormData();
-          presignFormData.append("action", "presign_url");
+          presignFormData.append("action", "bu_presign_url");
           presignFormData.append("formId", formId);
           presignFormData.append("fileId", file.id);
           presignFormData.append("nonce", nonce);
@@ -54,10 +54,11 @@ class UppyBrilliantStorage extends Plugin {
     return Promise.all(promises)
   }
 
-  
+
   install () {
     this.uppy.addPreProcessor(this.handlePrefixes)
   }
+
 
   uninstall () {
     this.uppy.removePreProcessor(this.handlePrefixes)

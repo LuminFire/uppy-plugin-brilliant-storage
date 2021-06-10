@@ -6,7 +6,7 @@ beforeEach(async () => {
   await page.goto(PATH, { waitUntil: 'load' })
 })
 
-describe('Brilliant Storage', () => {
+describe('BrilliantStorage', () => {
   it('should add a unique prefix to the filename, when using BrilliantStorage', async () => {
     const [fileChooser] = await Promise.all([
       page.waitForFileChooser(),
@@ -29,7 +29,7 @@ describe('Brilliant Storage', () => {
     })
 
     console.log(sizes)
-    
+
     expect(sizes.after).toBeLessThan(sizes.before)
     expect(sizes.before).toBe(33981)
     expect(sizes.after).toBe(12174)

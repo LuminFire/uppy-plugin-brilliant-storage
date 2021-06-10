@@ -13,7 +13,7 @@ include:
       # - 'test/WP/phpunit.yml'
       - 'security/lockfiles.yml'
       # - 'build/wp-plugin-with-npm.yml'
-      - 'deploy/documentation/brilliantsolutions-docsify.yml'
-  
+      # - 'deploy/documentation/brilliantsolutions-docsify.yml'
+
 test:security:npm:
   allow_failure: true
