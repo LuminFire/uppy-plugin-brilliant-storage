@@ -29,10 +29,13 @@ class UppyBrilliantStorage extends Plugin {
 
       var presignFormData = new FormData();
           presignFormData.append("action", "bu_presign_url");
+          presignFormData.append("service", window.brilliantUploaderField.service);
+          presignFormData.append("context", window.brilliantUploaderField.context);
           presignFormData.append("formId", formId);
           presignFormData.append("fileId", file.id);
           presignFormData.append("nonce", nonce);
           presignFormData.append("filename", file.name);
+          presignFormData.append("contentType", file.type.replace('/', '-')); // Replace slash with hyphen to work around WP sanitization.
 
       return fetch(presignEndpointPath, {
         method: 'POST',
