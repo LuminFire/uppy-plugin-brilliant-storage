@@ -28,7 +28,7 @@ class UppyBrilliantStorage extends Plugin {
       const file = this.uppy.getFile(fileID)
 
       var presignFormData = new FormData();
-          presignFormData.append("action", "presign_url");
+          presignFormData.append("action", "bu_presign_url");
           presignFormData.append("formId", formId);
           presignFormData.append("fileId", file.id);
           presignFormData.append("nonce", nonce);
