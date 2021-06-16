@@ -12,7 +12,7 @@ Uppy is being developed by the folks at [Transloadit](https://transloadit.com), 
 
 ```js
 const Uppy = require('@uppy/core')
-const BrilliantStorage = require('uppy-plugin-brilliant-storage')
+const BrilliantStorage = require('@luminfire/uppy-plugin-brilliant-storage')
 
 const uppy = Uppy()
 uppy.use(BrilliantStorage)
