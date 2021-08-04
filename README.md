@@ -6,20 +6,27 @@ BrilliantStorage is an [Uppy](https://uppy.io) file uploader plugin, that allows
 
 :warning: This is not an official Uppy plugin, so no support is offered for it. Please use at your own risk.
 
-Uppy is being developed by the folks at [Transloadit](https://transloadit.com), a versatile file encoding service.
-
-## Example
-
-```js
-const Uppy = require('@uppy/core')
-const BrilliantStorage = require('@luminfire/uppy-plugin-brilliant-storage')
-
-const uppy = Uppy()
-uppy.use(BrilliantStorage)
-```
 
 ## Installation
 
 ```bash
-$ npm install uppy-plugin-brilliant-storage --save
+$ npm install @luminfire/uppy-plugin-brilliant-storage --save
 ```
+
+## Usage
+
+```js
+const Uppy = require('@uppy/core');
+const BrilliantStorage = require('@luminfire/uppy-plugin-brilliant-storage');
+
+const uppy = Uppy();
+uppy.use(BrilliantStorage);
+```
+
+## Development
+
+### Publish a New Release
+
+1. Merge to `master`
+1. Tag with semantic versioning
+1. Run `npm publish`
