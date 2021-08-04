@@ -18,11 +18,10 @@ class UppyBrilliantStorage extends Plugin {
 
 
   handlePrefixes (fileIDs) {
-    var $form = jQuery('#brilliant_uploader'),
-    nonce = $form.data('nonce'),
-    presignEndpointPath = $form.data('admin-ajax'),
-    uploaderWrap = document.querySelector('#brilliant_uploader'),
-    formId = uploaderWrap.dataset.formid;
+    var field = document.querySelector(window.brilliantUploaderField.uploaderElementSelector),
+        nonce = field.dataset.nonce,
+        presignEndpointPath = field.dataset.presignEndpointPath,
+        formId = field.dataset.formid;
 
     const promises = fileIDs.map((fileID) => {
       const file = this.uppy.getFile(fileID)
