@@ -22,3 +22,11 @@ const BrilliantStorage = require('@luminfire/uppy-plugin-brilliant-storage');
 const uppy = Uppy();
 uppy.use(BrilliantStorage);
 ```
+
+## Development
+
+### Publish a New Release
+
+1. Merge to `master`
+1. Tag with semantic versioning
+1. Run `npm publish`
