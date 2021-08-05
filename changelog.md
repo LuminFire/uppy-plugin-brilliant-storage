@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 1.5.0 — 2021-08-05
+
+- Feature: allow setting all fields based on `brilliantStorageData.fields`
+
 ## 1.4.0 — 2021-08-04
 
 - Feature: remove dependence on jQuery
