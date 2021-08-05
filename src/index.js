@@ -42,12 +42,17 @@ class UppyBrilliantStorage extends Plugin {
       })
       .then(response => response.json())
       .then(data => {
-        uppy.setFileMeta(file.id, {
-          name: data.data.prefix,
-          title: file.name,
-          sizes: JSON.stringify(brilliantStorageData.fields.sizes),
-          tags: JSON.stringify(brilliantStorageData.fields.tags),
+        var fields = Object.keys(window.brilliantStorageData.fields).map(function (key) {
+          var value = window.brilliantStorageData.fields[key];
+          if ('object' === typeof window.brilliantStorageData.fields[key]) {
+              value = JSON.stringify(value);
+          }
+
+          return value;
         });
+        fields.name = data.data.prefix;
+
+        uppy.setFileMeta(file.id, fields);
       })
       .catch((error) => {
         console.error('Couldn’t fetch upload data: ', error);
