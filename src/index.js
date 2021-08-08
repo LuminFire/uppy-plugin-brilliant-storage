@@ -42,13 +42,14 @@ class UppyBrilliantStorage extends Plugin {
       })
       .then(response => response.json())
       .then(data => {
-        var fields = Object.keys(window.brilliantStorageData.fields).map(function (key) {
+        var fields = {};
+          Object.keys(window.brilliantStorageData.fields).map(function (key) {
           var value = window.brilliantStorageData.fields[key];
           if ('object' === typeof window.brilliantStorageData.fields[key]) {
-              value = JSON.stringify(value);
+            value = JSON.stringify(value);
           }
 
-          return value;
+          fields[key] =value;
         });
         fields.name = data.data.prefix;
 
