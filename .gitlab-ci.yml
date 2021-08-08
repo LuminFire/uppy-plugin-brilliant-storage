@@ -14,14 +14,3 @@ include:
       - 'security/lockfiles.yml'
       # - 'build/wp-plugin-with-npm.yml'
       # - 'deploy/documentation/brilliantsolutions-docsify.yml'
-
-
-deploy:
-  stage: deploy
-  tags:
-    - docker
-  image: node:latest
-  script:
-    - npm config set @luminfire:registry https://gitlab.luminfire.net/api/v4/packages/npm/
-    - echo "//${CI_SERVER_HOST}/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
-    - npm publish
