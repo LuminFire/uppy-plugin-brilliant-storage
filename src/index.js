@@ -43,10 +43,19 @@ class UppyBrilliantStorage extends Plugin {
       .then(response => response.json())
       .then(data => {
         var fields = {};
-          Object.keys(window.brilliantStorageData.fields).map(function (key) {
+        Object.keys(window.brilliantStorageData.fields).map(function (key) {
           var value = window.brilliantStorageData.fields[key];
-          if ('object' === typeof window.brilliantStorageData.fields[key]) {
-            value = JSON.stringify(value);
+          switch (typeof window.brilliantStorageData.fields[key]) {
+            case 'boolean':
+              value = Number(value);
+              break;
+
+            case 'object':
+              value = JSON.stringify(value);
+              break;
+
+            default:
+              break;
           }
 
           fields[key] =value;
