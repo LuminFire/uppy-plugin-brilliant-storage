@@ -51,7 +51,6 @@ class UppyBrilliantStorage extends Plugin {
 
           fields[key] =value;
         });
-        fields.name = data.data.prefix;
 
         uppy.setFileMeta(file.id, fields);
       })
