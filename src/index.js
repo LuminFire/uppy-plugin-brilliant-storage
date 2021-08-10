@@ -10,14 +10,14 @@ class UppyBrilliantStorage extends Plugin {
       timeout: 30 * 1000,
       limit: 0,
       metaFields: [], // have to opt in
-      handlePrefixes: this.handlePrefixes.bind(this),
+      addCustomFileMeta: this.addCustomFileMeta.bind(this),
     }
 
     this.opts = { ...defaultOptions, ...opts }
   }
 
 
-  handlePrefixes (fileIDs) {
+  addCustomFileMeta (fileIDs) {
     var field = document.querySelector(window.brilliantUploaderField.uploaderElementSelector),
         nonce = field.dataset.nonce,
         presignEndpointPath = field.dataset.presignEndpointPath,
@@ -63,12 +63,12 @@ class UppyBrilliantStorage extends Plugin {
 
 
   install () {
-    this.uppy.addPreProcessor(this.handlePrefixes)
+    this.uppy.addPreProcessor(this.addCustomFileMeta)
   }
 
 
   uninstall () {
-    this.uppy.removePreProcessor(this.handlePrefixes)
+    this.uppy.removePreProcessor(this.addCustomFileMeta)
   }
 }
 
