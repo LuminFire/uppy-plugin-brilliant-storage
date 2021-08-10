@@ -10,14 +10,14 @@ class UppyBrilliantStorage extends Plugin {
       timeout: 30 * 1000,
       limit: 0,
       metaFields: [], // have to opt in
-      handlePrefixes: this.handlePrefixes.bind(this),
+      addCustomFileMeta: this.addCustomFileMeta.bind(this),
     }
 
     this.opts = { ...defaultOptions, ...opts }
   }
 
 
-  handlePrefixes (fileIDs) {
+  addCustomFileMeta (fileIDs) {
     var field = document.querySelector(window.brilliantUploaderField.uploaderElementSelector),
         nonce = field.dataset.nonce,
         presignEndpointPath = field.dataset.presignEndpointPath,
@@ -43,15 +43,28 @@ class UppyBrilliantStorage extends Plugin {
       .then(response => response.json())
       .then(data => {
         var fields = {};
-          Object.keys(window.brilliantStorageData.fields).map(function (key) {
-          var value = window.brilliantStorageData.fields[key];
-          if ('object' === typeof window.brilliantStorageData.fields[key]) {
-            value = JSON.stringify(value);
+        Object.keys(window.brilliantStorageData.fields).map(function (key) {
+          if (data.data.fields.hasOwnProperty(key)) {
+            var value = data.data.fields[key];
+          } else {
+            var value = window.brilliantStorageData.fields[key];
+          }
+
+          switch (typeof window.brilliantStorageData.fields[key]) {
+            case 'boolean':
+              value = Number(value);
+              break;
+
+            case 'object':
+              value = JSON.stringify(value);
+              break;
+
+            default:
+              break;
           }
 
           fields[key] =value;
         });
-        fields.name = data.data.prefix;
 
         uppy.setFileMeta(file.id, fields);
       })
@@ -64,12 +77,12 @@ class UppyBrilliantStorage extends Plugin {
 
 
   install () {
-    this.uppy.addPreProcessor(this.handlePrefixes)
+    this.uppy.addPreProcessor(this.addCustomFileMeta)
   }
 
 
   uninstall () {
-    this.uppy.removePreProcessor(this.handlePrefixes)
+    this.uppy.removePreProcessor(this.addCustomFileMeta)
   }
 }
 
