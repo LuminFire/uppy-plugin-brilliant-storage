@@ -27,6 +27,7 @@ uppy.use(BrilliantStorage);
 
 ### Publish a New Release
 
+1. Commit all changes, including changelog entry
 1. Run `npm version major | minor | patch --no-git-tag-version`
 1. Merge to `master`
 1. Tag with semantic versioning
