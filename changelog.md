@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## 1.5.4 — 2021-08-18
+
+- Bugfix: improve relability when no fields are returned from presigned URL
+
 ## 1.5.3 — 2021-08-10
 
 - Feature: don’t use random prefix as filename
