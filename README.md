@@ -27,7 +27,8 @@ uppy.use(BrilliantStorage);
 
 ### Publish a New Release
 
-1. Run `npm version major | minor | patch`
+1. Commit all changes, including changelog entry
+1. Run `npm version major | minor | patch --no-git-tag-version`
 1. Merge to `master`
 1. Tag with semantic versioning
 1. Ensure the [public repo](https://github.com/LuminFire/uppy-plugin-brilliant-storage/tags) has the up-to-date code
