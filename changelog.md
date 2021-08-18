@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## 1.5.6 — 2021-08-18
 
 - Bugfix: fix broken deploy
--
+
 ## 1.5.5 — 2021-08-18
 
 - Bugfix: improve reliability when fields are returned from presigned URL
