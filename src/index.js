@@ -63,7 +63,12 @@ class UppyBrilliantStorage extends Plugin {
               break;
           }
 
-          fields[key] =value;
+          // Special case: we don’t want to overwrite the file name with an empty value.
+          if ('name' === key && value.length < 1) {
+            return;
+          }
+
+          fields[key] = value;
         });
 
         uppy.setFileMeta(file.id, fields);
