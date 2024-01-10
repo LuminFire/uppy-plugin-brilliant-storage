@@ -2,6 +2,7 @@
 # See https://git.luminfire.net/ops/tooling/ci/gitlab-ci-templates/-/tree/master/deploy-runcloud-laravel-mix
 
 stages:
+  - solcare
   - test
   - build
   - deploy
