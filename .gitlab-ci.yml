@@ -9,6 +9,8 @@ stages:
 include:
   - project: 'templates/gitlab/ci-templates'
     file:
+      - 'presets/all.yml'
+      - 'presets/php.yml' # because lockfiles depends on it
       # - 'test/php-syntax-check.yml'
       # - 'test/WP/phpunit.yml'
       - 'security/lockfiles.yml'
